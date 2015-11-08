@@ -46,6 +46,14 @@
         }
     };
 
+    Cheese.prototype.buildListener = function (listener) {
+        return function (e) {
+            if (typeof listener === 'function') {
+                listener.apply(this.elem, [e]);
+            }
+        };
+    };
+
     Cheese.prototype.setRoute = function (route) {
         var routeListeners = this.routes[route],
             eventName;
@@ -54,13 +62,7 @@
         if (routeListeners) {
             for (eventName in routeListeners) {
                 if (routeListeners.hasOwnProperty(eventName)) {
-                    this.listeners[eventName] = (function (listeners) {
-                        return function (e) {
-                            if (typeof listeners === 'function') {
-                                listeners.apply(this.elem, [e]);
-                            }
-                        };
-                    }(routeListeners[eventName])).bind(this);
+                    this.listeners[eventName] = (this.buildListener(routeListeners[eventName])).bind(this);
                 }
             }
         }
