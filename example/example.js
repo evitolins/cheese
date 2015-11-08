@@ -29,8 +29,8 @@
         isDrawing = false;
 
     cheese.addRoute('route1', {
-        'mouseover' : function (e) { console.log('route1: mouseover', relCoords(e, this).x, relCoords(e, this).y); },
-        'mouseout'  : function (e) { console.log('route1: mouseout', relCoords(e, this).x, relCoords(e, this).y); },
+        'mouseover' : function (e) { this.style.outlineColor = "blue"; },
+        'mouseout'  : function (e) { this.style.outlineColor = ""; },
         'mousedown' : function (e) { isDrawing = true; draw(relCoords(e, this).x, relCoords(e, this).y, "red", 1); },
         'mousemove' : function (e) { if (isDrawing) { draw(relCoords(e, this).x, relCoords(e, this).y, "red", 1); } },
         'mouseup'   : function (e) { isDrawing = false; }
