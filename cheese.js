@@ -1,11 +1,11 @@
-(function (window, console) {
+(function (document, window, console) {
     'use strict';
 
     var Cheese = function (elem) {
         this.elem = elem;
         this.zoom = 1;
-        this.currentMode = undefined;
-        this.modes = {};
+        this.currentRoute = undefined;
+        this.routes = {};
         this.listener = {
             'mouseover' : function (e, x, y) { console.log('default: mouseover', e.clientX, e.clientY, x, y); },
             'mouseout'  : function (e, x, y) { console.log('default: mouseout', e.clientX, e.clientY, x, y); },
@@ -29,14 +29,13 @@
         };
     };
 
-
     Cheese.prototype.setZoom = function (zoom) {
         this.zoom = zoom || 1;
         return this.zoom;
     };
 
-    Cheese.prototype.addMode = function (mode, events) {
-        this.modes[mode] = events;
+    Cheese.prototype.addRoute = function (route, events) {
+        this.routes[route] = events;
     };
 
     Cheese.prototype.bindEvents = function (active) {
@@ -57,12 +56,12 @@
         }
     };
 
-    Cheese.prototype.setMode = function (mode) {
+    Cheese.prototype.setRoute = function (route) {
         var etype;
         this.bindEvents(false);
-        this.currentMode = mode || this.currentMode;
-        if (this.modes.hasOwnProperty(mode)) {
-            for (etype in this.modes[mode]) {
+        this.currentRoute = route || this.currentRoute;
+        if (this.routes.hasOwnProperty(route)) {
+            for (etype in this.routes[route]) {
                 this.listener[etype] = (function (listener) {
                     return function (e) {
                         var coords = this.relCoords(e, this.elem, this.zoom);
@@ -70,13 +69,13 @@
                             listener.apply(this.elem, [e, coords.x, coords.y]);
                         }
                     };
-                }(this.modes[mode][etype])).bind(this);
+                }(this.routes[route][etype])).bind(this);
             }
         }
         this.bindEvents(true);
-        return this.currentMode;
+        return this.currentRoute;
     };
 
     window.Cheese = Cheese;
 
-}(window, console));
+}(document, window, console));
