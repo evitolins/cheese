@@ -1,4 +1,4 @@
-(function (document, window, console) {
+(function (window) {
     'use strict';
 
     var Cheese = function (elem) {
@@ -72,4 +72,4 @@
 
     window.Cheese = Cheese;
 
-}(document, window, console));
+}(window));
