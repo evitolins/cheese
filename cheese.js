@@ -7,31 +7,13 @@
         this.currentRoute = undefined;
         this.routes = {};
         this.listener = {
-            'mouseover' : function (e, x, y) { console.log('default: mouseover', e.clientX, e.clientY, x, y); },
-            'mouseout'  : function (e, x, y) { console.log('default: mouseout', e.clientX, e.clientY, x, y); },
-            'mousedown' : function (e, x, y) { console.log('default: mousedown', e.clientX, e.clientY, x, y); },
-            'mousemove' : function (e, x, y) { console.log('default: mousemove', e.clientX, e.clientY, x, y); },
-            'mouseup'   : function (e, x, y) { console.log('default: mouseup', e.clientX, e.clientY, x, y); }
+            'mouseover' : function (e) { console.log('default: mouseover', e.clientX, e.clientY); },
+            'mouseout'  : function (e) { console.log('default: mouseout', e.clientX, e.clientY); },
+            'mousedown' : function (e) { console.log('default: mousedown', e.clientX, e.clientY); },
+            'mousemove' : function (e) { console.log('default: mousemove', e.clientX, e.clientY); },
+            'mouseup'   : function (e) { console.log('default: mouseup', e.clientX, e.clientY); }
         };
         this.bound = false;
-    };
-
-    Cheese.prototype.relCoords = function (e, elem, zoom) {
-        var rect = elem.getBoundingClientRect(),
-            offset = {
-                left: rect.left + document.body.scrollLeft,
-                top: rect.top + document.body.scrollTop
-            };
-        zoom = zoom || 1;
-        return {
-            x : (e.pageX - offset.left) / zoom,
-            y : (e.pageY - offset.top) / zoom
-        };
-    };
-
-    Cheese.prototype.setZoom = function (zoom) {
-        this.zoom = zoom || 1;
-        return this.zoom;
     };
 
     Cheese.prototype.addRoute = function (route, events) {
@@ -64,9 +46,8 @@
             for (etype in this.routes[route]) {
                 this.listener[etype] = (function (listener) {
                     return function (e) {
-                        var coords = this.relCoords(e, this.elem, this.zoom);
                         if (typeof listener === 'function') {
-                            listener.apply(this.elem, [e, coords.x, coords.y]);
+                            listener.apply(this.elem, [e]);
                         }
                     };
                 }(this.routes[route][etype])).bind(this);
