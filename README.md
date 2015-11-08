@@ -57,13 +57,13 @@ cheese.addRoute('route2', {
 
 ### Set Route
 ```javascript
-cheese.setMode('route2');
+cheese.setRoute('route2');
 ```
 
 
 ### Disable Listeners
 ```javascript
-cheese.bindEvents(false);
+cheese.setRoute();
 ```
 
 

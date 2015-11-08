@@ -49,9 +49,8 @@
         var routeListeners = this.routes[route],
             eventName;
         this.bindEvents(false);
-        this.listeners = {};
+        this.currentRoute = route;
         if (routeListeners) {
-            this.currentRoute = route || this.currentRoute;
             for (eventName in routeListeners) {
                 if (routeListeners.hasOwnProperty(eventName)) {
                     this.listeners[eventName] = (function (listeners) {
