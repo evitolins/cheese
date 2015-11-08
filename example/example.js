@@ -26,24 +26,30 @@
             ctx.fillStyle = fillStyle;
             ctx.fillRect(x - size / 2, y - size / 2, size, size);
         },
-        isDrawing = false;
+
+        colorSample = function (x, y) {
+            var ctx = elem.getContext('2d'),
+                s = ctx.getImageData(x, y, 1, 1);
+            return [ s.data[0], s.data[1], s.data[2] ];
+        },
+        isDragging = false;
 
     cheese.addRoute('route1', {
         'mouseover' : function (e) { this.style.outlineColor = "blue"; },
         'mouseout'  : function (e) { this.style.outlineColor = ""; },
-        'mousedown' : function (e) { isDrawing = true; draw(relCoords(e, this).x, relCoords(e, this).y, "red", 1); },
-        'mousemove' : function (e) { if (isDrawing) { draw(relCoords(e, this).x, relCoords(e, this).y, "red", 1); } },
-        'mouseup'   : function (e) { isDrawing = false; }
+        'mousedown' : function (e) { isDragging = true; draw(relCoords(e, this).x, relCoords(e, this).y, "red", 1); },
+        'mousemove' : function (e) { if (isDragging) { draw(relCoords(e, this).x, relCoords(e, this).y, "red", 1); } },
+        'mouseup'   : function (e) { isDragging = false; }
     });
     cheese.addRoute('route2', {
-        'mousedown' : function (e) { isDrawing = true; draw(relCoords(e, this).x, relCoords(e, this).y, "blue", 4); },
-        'mousemove' : function (e) { if (isDrawing) { draw(relCoords(e, this).x, relCoords(e, this).y, "blue", 4); } },
-        'mouseup'   : function (e) { isDrawing = false; }
+        'mousedown' : function (e) { isDragging = true; draw(relCoords(e, this).x, relCoords(e, this).y, "blue", 4); },
+        'mousemove' : function (e) { if (isDragging) { draw(relCoords(e, this).x, relCoords(e, this).y, "blue", 4); } },
+        'mouseup'   : function (e) { isDragging = false; }
     });
     cheese.addRoute('route3', {
-        'mousedown' : function (e) { isDrawing = true; draw(relCoords(e, this).x, relCoords(e, this).y, "green", 8); },
-        'mousemove' : function (e) { if (isDrawing) draw(relCoords(e, this).x, relCoords(e, this).y, "green", 8); },
-        'mouseup'   : function (e) { isDrawing = false; }
+        'mousedown' : function (e) { isDragging = true; console.log(colorSample(relCoords(e, this).x, relCoords(e, this).y)); },
+        'mousemove' : function (e) { if (isDragging) { console.log(colorSample(relCoords(e, this).x, relCoords(e, this).y)); } },
+        'mouseup'   : function (e) { isDragging = false; }
     });
 
     var btn1 = document.getElementById('button1');
