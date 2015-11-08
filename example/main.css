@@ -1,4 +1,13 @@
 canvas {
-    outline: 1px #aaa solid;
-    cursor: crosshair;
+  width: 400px;
+  height: 300px;
+  outline: 1px #aaa solid;
+  cursor: crosshair;
+}
+
+#colorSampled {
+  width: 20px;
+  height: 20px;
+  outline: 1px #aaa solid;
+  margin: 10px;
 }
