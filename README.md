@@ -68,9 +68,19 @@ cheese.setRoute();
 
 
 
+Methods
+----------------------------
+__addRoute(routeName, events)__ :
+Adds specified route settings to cheese's route list.  Events should be formatted as an object with keys as the event name, and a value of the event's listener.
+
+__setRoute(route)__ :
+Choose an existing route to activate.  Cheese will remove any previously bound events before binding the new route.
+
+
+
 Important Notes
 ----------------------------
 - Cheese has no outside dependences
 - Cheese removes all previously assigned listeners before connecting the new routes
-    - Uses `bindEvents(false)` method
+    - Uses `cheese.setRoute()` method
 
