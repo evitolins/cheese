@@ -1,5 +1,4 @@
-#viewport {
-    width: 400px;
-    height: 300px;
+canvas {
     outline: 1px #aaa solid;
+    cursor: crosshair;
 }
