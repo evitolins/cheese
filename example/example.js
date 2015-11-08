@@ -23,15 +23,10 @@
         'mouseup'   : function (e) { console.log('route1: mouseup', relCoords(e, this).x, relCoords(e, this).y ); }
     });
     cheese.addRoute('route2', {
-        'mouseover' : function (e) { console.log('route2: mouseover', relCoords(e, this).x, relCoords(e, this).y ); },
-        'mouseout'  : function (e) { console.log('route2: mouseout', relCoords(e, this).x, relCoords(e, this).y ); },
-        'mousedown' : function (e) { console.log('route2: mousedown', relCoords(e, this).x, relCoords(e, this).y ); },
-        'mousemove' : function (e) { console.log('route2: mousemove', relCoords(e, this).x, relCoords(e, this).y ); },
-        'mouseup'   : function (e) { console.log('route2: mouseup', relCoords(e, this).x, relCoords(e, this).y ); }
+        'mousedown' : function (event) { console.log('route2: mousedown', event.clientX, event.clientY); },
+        'mouseup'   : function (event) { console.log('route2: mouseup', event.clientX, event.clientY); }
     });
     cheese.addRoute('route3', {
-        'mouseover' : function (e) { console.log('route3: mouseover', relCoords(e, this).x, relCoords(e, this).y ); },
-        'mouseout'  : function (e) { console.log('route3: mouseout', relCoords(e, this).x, relCoords(e, this).y ); },
         'mousedown' : function (e) { console.log('route3: mousedown', relCoords(e, this).x, relCoords(e, this).y ); },
         'mousemove' : function (e) { console.log('route3: mousemove', relCoords(e, this).x, relCoords(e, this).y ); },
         'mouseup'   : function (e) { console.log('route3: mouseup', relCoords(e, this).x, relCoords(e, this).y ); }

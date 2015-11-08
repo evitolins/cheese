@@ -35,7 +35,8 @@ var cheese = new Cheese(elem);
 
 
 ### Add Routes
-- Cheese routes expect 5 listener types: `mouseover`, `mouseout`, `mousedown`, `mousemove`, `mouseup`
+- Cheese routes accepts listener types: `mouseover`, `mouseout`, `mousedown`, `mousemove`, `mouseup`
+    - `mouseup` listeners is assigned to the `window` object, instead of the assigned element
 - Cheese-issued event listeners deliver `event` as it's argument
 - Each listener's `this` scope is assigned to Cheese's attached element (ie. #viewport)
 
@@ -48,10 +49,7 @@ cheese.addRoute('route1', {
     'mouseup'   : function (event) { console.log('route1: mouseup', event.clientX, event.clientY); }
 });
 cheese.addRoute('route2', {
-    'mouseover' : function (event) { console.log('route2: mouseover', event.clientX, event.clientY); },
-    'mouseout'  : function (event) { console.log('route2: mouseout', event.clientX, event.clientY); },
     'mousedown' : function (event) { console.log('route2: mousedown', event.clientX, event.clientY); },
-    'mousemove' : function (event) { console.log('route2: mousemove', event.clientX, event.clientY); },
     'mouseup'   : function (event) { console.log('route2: mouseup', event.clientX, event.clientY); }
 });
 ```
@@ -75,5 +73,4 @@ Important Notes
 - Cheese has no outside dependences
 - Cheese removes all previously assigned listeners before connecting the new routes
     - Uses `bindEvents(false)` method
-- `mouseup` listeners is assigned to the `window` object, instead of the assigned element
 

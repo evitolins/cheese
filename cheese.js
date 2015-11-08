@@ -3,54 +3,65 @@
 
     var Cheese = function (elem) {
         this.elem = elem;
-        this.zoom = 1;
         this.currentRoute = undefined;
         this.routes = {};
-        this.listener = {
-            'mouseover' : function (e) { console.log('default: mouseover', e.clientX, e.clientY); },
-            'mouseout'  : function (e) { console.log('default: mouseout', e.clientX, e.clientY); },
-            'mousedown' : function (e) { console.log('default: mousedown', e.clientX, e.clientY); },
-            'mousemove' : function (e) { console.log('default: mousemove', e.clientX, e.clientY); },
-            'mouseup'   : function (e) { console.log('default: mouseup', e.clientX, e.clientY); }
-        };
+        this.listeners = {};
         this.bound = false;
+        this.acceptedEvents = ['mouseover', 'mouseout', 'mousedown', 'mousemove', 'mouseup'];
+        this.windowEvents = ['mouseup'];
     };
 
     Cheese.prototype.addRoute = function (route, events) {
         this.routes[route] = events;
     };
 
+    Cheese.prototype.addListeners = function () {
+        var listener, elem;
+        for (listener in this.listeners) {
+            if (this.listeners.hasOwnProperty(listener) && this.acceptedEvents.indexOf(listener) > -1) {
+                elem = (this.windowEvents.indexOf(listener) > -1) ? window : this.elem;
+                elem.addEventListener(listener, this.listeners[listener]);
+            }
+        }
+    };
+
+    Cheese.prototype.removeListeners = function () {
+        var listener, elem;
+        for (listener in this.listeners) {
+            if (this.listeners.hasOwnProperty(listener)) {
+                elem = (this.windowEvents.indexOf(listener) > -1) ? window : this.elem;
+                elem.removeEventListener(listener, this.listeners[listener]);
+            }
+        }
+    };
+
     Cheese.prototype.bindEvents = function (active) {
         if (active && !this.bound) {
             this.bound = true;
-            this.elem.addEventListener('mouseover', this.listener.mouseover);
-            this.elem.addEventListener('mouseout', this.listener.mouseout);
-            this.elem.addEventListener('mousedown', this.listener.mousedown);
-            this.elem.addEventListener('mousemove', this.listener.mousemove);
-            window.addEventListener('mouseup', this.listener.mouseup);
+            this.addListeners();
         } else {
             this.bound = false;
-            this.elem.removeEventListener('mouseover', this.listener.mouseover);
-            this.elem.removeEventListener('mouseout', this.listener.mouseout);
-            this.elem.removeEventListener('mousedown', this.listener.mousedown);
-            this.elem.removeEventListener('mousemove', this.listener.mousemove);
-            window.removeEventListener('mouseup', this.listener.mouseup);
+            this.removeListeners();
         }
     };
 
     Cheese.prototype.setRoute = function (route) {
-        var etype;
+        var routeListeners = this.routes[route],
+            eventName;
         this.bindEvents(false);
-        this.currentRoute = route || this.currentRoute;
-        if (this.routes.hasOwnProperty(route)) {
-            for (etype in this.routes[route]) {
-                this.listener[etype] = (function (listener) {
-                    return function (e) {
-                        if (typeof listener === 'function') {
-                            listener.apply(this.elem, [e]);
-                        }
-                    };
-                }(this.routes[route][etype])).bind(this);
+        this.listeners = {};
+        if (routeListeners) {
+            this.currentRoute = route || this.currentRoute;
+            for (eventName in routeListeners) {
+                if (routeListeners.hasOwnProperty(eventName)) {
+                    this.listeners[eventName] = (function (listeners) {
+                        return function (e) {
+                            if (typeof listeners === 'function') {
+                                listeners.apply(this.elem, [e]);
+                            }
+                        };
+                    }(routeListeners[eventName])).bind(this);
+                }
             }
         }
         this.bindEvents(true);
