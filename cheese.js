@@ -33,6 +33,7 @@
                 elem.removeEventListener(listener, this.listeners[listener]);
             }
         }
+        this.listeners = {};
     };
 
     Cheese.prototype.bindEvents = function (active) {
