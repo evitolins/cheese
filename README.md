@@ -55,13 +55,13 @@ cheese.addRoute('route2', {
 ```
 
 
-### Set Route
+### Enable Route
 ```javascript
 cheese.setRoute('route2');
 ```
 
 
-### Disable Listeners
+### Disable Routing
 ```javascript
 cheese.setRoute();
 ```
