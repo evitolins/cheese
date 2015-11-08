@@ -1,14 +1,31 @@
 # cheese
-Routing your mouse events to preset behaviors.
+Routing an element's mouse events to specific sets of behaviors.
 
+```
+___________________________________A 
+| _____ |   | ___ | ___ ___ | |   | |
+| |   | |_| |__ | |_| __|____ | | | |
+| | | |_________|__ |______ |___|_| |
+| |_|   | _______ |______ |   | ____|
+| ___ | |____ | |______ | |_| |____ |
+|___|_|____ | |   ___ | |________ | |
+|   ________| | |__ | |______ | | | |
+| | | ________| | __|____ | | | __| |
+|_| |__ |   | __|__ | ____| | |_| __|
+|   ____| | |____ | |__ |   |__ |__ |
+| |_______|_______|___|___|___|_____|
+ B
+```
 
-Summary
-----------------------------
-Cheese allows you easily to route mouse events to specific sets of behaviors.
 
 
 Getting Started
 ----------------------------
+### Install
+```bash
+bower install -S cheese
+```
+
 
 ### Attach a DOM element
 ```javascript
@@ -18,24 +35,24 @@ var cheese = new Cheese(elem);
 
 
 ### Add Routes
-Cheese routes expect 5 listener types: `mouseover`, `mouseout`, `mousedown`, `mousemove`, `mouseup`
-
-Cheese-issued event listeners emit 3 arguments: `event`, `relX`, `relY`
+- Cheese routes expect 5 listener types: `mouseover`, `mouseout`, `mousedown`, `mousemove`, `mouseup`
+- Cheese-issued event listeners deliver 3 arguments: `event`, `relX`, `relY`
+- Each listener's `this` scope is assigned to the attached element
 
 ```javascript
 cheese.addRoute('route1', {
-    'mouseover' : function (e, x, y) { console.log('route1: mouseover', e.clientX, e.clientY, x, y); },
-    'mouseout'  : function (e, x, y) { console.log('route1: mouseout', e.clientX, e.clientY, x, y); },
-    'mousedown' : function (e, x, y) { console.log('route1: mousedown', e.clientX, e.clientY, x, y); },
-    'mousemove' : function (e, x, y) { console.log('route1: mousemove', e.clientX, e.clientY, x, y); },
-    'mouseup'   : function (e, x, y) { console.log('route1: mouseup', e.clientX, e.clientY, x, y); }
+    'mouseover' : function (event, relX, relY) { console.log('route1: mouseover', event, relX, relY); },
+    'mouseout'  : function (event, relX, relY) { console.log('route1: mouseout', event, relX, relY); },
+    'mousedown' : function (event, relX, relY) { console.log('route1: mousedown', event, relX, relY); },
+    'mousemove' : function (event, relX, relY) { console.log('route1: mousemove', event, relX, relY); },
+    'mouseup'   : function (event, relX, relY) { console.log('route1: mouseup', event, relX, relY); }
 });
 cheese.addRoute('route2', {
-    'mouseover' : function (e, x, y) { console.log('route2: mouseover', e.clientX, e.clientY, x, y); },
-    'mouseout'  : function (e, x, y) { console.log('route2: mouseout', e.clientX, e.clientY, x, y); },
-    'mousedown' : function (e, x, y) { console.log('route2: mousedown', e.clientX, e.clientY, x, y); },
-    'mousemove' : function (e, x, y) { console.log('route2: mousemove', e.clientX, e.clientY, x, y); },
-    'mouseup'   : function (e, x, y) { console.log('route2: mouseup', e.clientX, e.clientY, x, y); }
+    'mouseover' : function (event, relX, relY) { console.log('route2: mouseover', event, relX, relY); },
+    'mouseout'  : function (event, relX, relY) { console.log('route2: mouseout', event, relX, relY); },
+    'mousedown' : function (event, relX, relY) { console.log('route2: mousedown', event, relX, relY); },
+    'mousemove' : function (event, relX, relY) { console.log('route2: mousemove', event, relX, relY); },
+    'mouseup'   : function (event, relX, relY) { console.log('route2: mouseup', event, relX, relY); }
 });
 ```
 
@@ -52,6 +69,11 @@ cheese.bindEvents(false);
 ```
 
 
-How it Works
+
+Important Notes
 ----------------------------
-Cheese removes all previous listeners before connecting the new routes
+- Cheese has no outside dependences
+- Cheese removes all previously assigned listeners before connecting the new routes
+    - Uses `bindEvents(false)` method
+- `mouseup` listeners is applied to the `window` object, instead of the assigned element
+
