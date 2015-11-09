@@ -1,0 +1,26 @@
+{
+  "name": "cheese",
+  "main": "cheese.js",
+  "homepage": "https://github.com/evitolins/cheese",
+  "authors": [
+    "Eriks Vitolins <evitolins@gmail.com>"
+  ],
+  "description": "Route your mouse events to preset behavior sets",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "mouse",
+    "events",
+    "route",
+    "router"
+  ],
+  "license": "GNU",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
