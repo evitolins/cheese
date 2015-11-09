@@ -16,6 +16,49 @@
   <input id='button3' type='button' value='route3'/>
   <input id='button4' type='button' value='clear'/>
   <div id='colorSampled'></div>
+
+  <h2>code: route assignment example</h2>
+  <pre>
+    <code>
+    var elem = document.getElementById('viewport'),
+        cheese = new Cheese(elem),
+        
+    ...
+    
+    
+    cheese.addRoute('route1', {
+        'mouseover' : function (e) { this.style.outlineColor = "blue"; },
+        'mouseout'  : function (e) { this.style.outlineColor = ""; },
+        'mousedown' : function (e) { isDragging = true; draw(this, relCoords(e, this).x, relCoords(e, this).y, "red", 10); },
+        'mousemove' : function (e) { if (isDragging) { draw(this, relCoords(e, this).x, relCoords(e, this).y, "red", 10); } },
+        'mouseup'   : function (e) { isDragging = false; }
+    });
+    
+    cheese.addRoute('route2', {
+        'mousedown' : function (e) { isDragging = true; draw(this, relCoords(e, this).x, relCoords(e, this).y, "blue", 10); },
+        'mousemove' : function (e) { if (isDragging) { draw(this, relCoords(e, this).x, relCoords(e, this).y, "blue", 10); } },
+        'mouseup'   : function (e) { isDragging = false; }
+    });
+    
+    cheese.addRoute('route3', {
+        'mousedown' : function (e) {
+            isDragging = true;
+            var c = colorSample(this, relCoords(e, this).x, relCoords(e, this).y);
+            colorSampled.style.background = 'rgb(' + c.r + ',' + c.g + ',' + c.b + ')';
+        },
+        'mousemove' : function (e) {
+            if (isDragging) {
+                var c = colorSample(this, relCoords(e, this).x, relCoords(e, this).y);
+                colorSampled.style.backgroundColor = 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' + c[3] + ')';
+            }
+        },
+        'mouseup'   : function (e) {
+            isDragging = false;
+        }
+    });
+    </code>
+  </pre>
+
   <script type="text/javascript" src="../cheese.js"></script>
   <script type="text/javascript" src="example.js"></script>
 </body>
