@@ -12,12 +12,11 @@
   <h2>example: Simple mouse event routing.</p>
   <canvas id='viewport' width=400 height=300></canvas>
   <br>
-  <input id='button1' type='button' value='route1'/>
-  <input id='button2' type='button' value='route2'/>
-  <input id='button3' type='button' value='route3'/>
+  <input id='button1' type='button' value='draw'/>
+  <input id='button2' type='button' value='erase'/>
+  <input id='button3' type='button' value='eyedropper'/>
   <input id='button4' type='button' value='clear'/>
   <div id='colorSampled'></div>
-
   <h2>code: route assignment example</h2>
   <pre>
     <code>
@@ -27,40 +26,30 @@
     ...
     
     
-    cheese.addRoute('route1', {
-        'mouseover' : function (e) { this.style.outlineColor = "blue"; },
+    cheese.addRoute('draw', {
+        'mouseover' : function (e) { this.style.outlineColor = "#CC841D"; },
         'mouseout'  : function (e) { this.style.outlineColor = ""; },
         'mousedown' : function (e) { isDragging = true; draw(this, relCoords(e, this).x, relCoords(e, this).y, "red", 10); },
         'mousemove' : function (e) { if (isDragging) { draw(this, relCoords(e, this).x, relCoords(e, this).y, "red", 10); } },
         'mouseup'   : function (e) { isDragging = false; }
     });
     
-    cheese.addRoute('route2', {
+    cheese.addRoute('erase', {
         'mousedown' : function (e) { isDragging = true; draw(this, relCoords(e, this).x, relCoords(e, this).y, "blue", 10); },
         'mousemove' : function (e) { if (isDragging) { draw(this, relCoords(e, this).x, relCoords(e, this).y, "blue", 10); } },
         'mouseup'   : function (e) { isDragging = false; }
     });
     
-    cheese.addRoute('route3', {
-        'mousedown' : function (e) {
-            isDragging = true;
-            var c = colorSample(this, relCoords(e, this).x, relCoords(e, this).y);
-            colorSampled.style.background = 'rgb(' + c.r + ',' + c.g + ',' + c.b + ')';
-        },
-        'mousemove' : function (e) {
-            if (isDragging) {
-                var c = colorSample(this, relCoords(e, this).x, relCoords(e, this).y);
-                colorSampled.style.backgroundColor = 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' + c[3] + ')';
-            }
-        },
-        'mouseup'   : function (e) {
-            isDragging = false;
-        }
+    cheese.addRoute('eyedropper', {
+        'mousedown' : function (e) { isDragging = true; var c = colorSample(this, relCoords(e, this).x, relCoords(e, this).y); colorSampled.style.background = 'rgb(' + c.r + ',' + c.g + ',' + c.b + ')'; },
+        'mousemove' : function (e) { if (isDragging) { var c = colorSample(this, relCoords(e, this).x, relCoords(e, this).y); colorSampled.style.backgroundColor = 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' + c[3] + ')';} },
+        'mouseup'   : function (e) { isDragging = false; }
     });
     </code>
   </pre>
-
+  
   <script type="text/javascript" src="../cheese.js"></script>
   <script type="text/javascript" src="example.js"></script>
+  <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
 </body>
 </html>
