@@ -1,7 +1,7 @@
 body {
   background: #F2EFAF;
   font-family: Helvetica Neue, Helvetica, sans-serif;
-  color: #D2CD62;
+  color: #CC841D;
   padding: 10px 40px;
 }
 
@@ -17,18 +17,19 @@ h2{
 
 pre {
   min-width: 400px;
-  background: #737141;
-  color: #fff;
+  max-width: 800px;
+  background: #E7E4A7;
+  color: #86856C;
   overflow: auto;
   border-radius: 6px;
-  margin: 20px
+  border: 1px #CC841D solid;
 }
 
 canvas {
   background: white;
   width: 400px;
   height: 300px;
-  outline: 1px #aaa solid;
+  outline: 4px #aaa solid;
   cursor: crosshair;
 }
 
