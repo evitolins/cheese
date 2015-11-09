@@ -1,4 +1,31 @@
+body {
+  background: #F2EFAF;
+  font-family: Helvetica Neue, Helvetica, sans-serif;
+  color: #D2CD62;
+  padding: 10px 40px;
+}
+
+h1{
+  font-weight: 100;
+  font-size: 3em;
+}
+
+h2{
+  font-weight: 100;
+  font-size: 1.4em;
+}
+
+pre {
+  min-width: 400px;
+  background: #737141;
+  color: #fff;
+  overflow: auto;
+  border-radius: 6px;
+  margin: 20px
+}
+
 canvas {
+  background: white;
   width: 400px;
   height: 300px;
   outline: 1px #aaa solid;
