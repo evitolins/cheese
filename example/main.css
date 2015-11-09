@@ -39,3 +39,7 @@ canvas {
   outline: 1px #aaa solid;
   margin: 10px;
 }
+
+.github-button {
+  display: none;
+}
