@@ -6,17 +6,18 @@
   <link rel="stylesheet" type="text/css" href="main.css">
 </head>
 <body>
-  <h1>Cheese <img src='http://www.clker.com/cliparts/3/4/N/8/c/5/fancy-cheese-th.png' style="height:.7em;" /></h1>
-  <a class="github-button" href="https://github.com/evitolins/cheese" data-count-href="/evitolins/cheese/stargazers" data-count-api="/repos/evitolins/cheese#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star evitolins/cheese on GitHub">Star</a>
-
+  <h1>Cheese <img src='http://www.clker.com/cliparts/3/4/N/8/c/5/fancy-cheese-th.png' style="height:.7em;" /> <a class="github-button" href="https://github.com/evitolins/cheese" data-count-href="/evitolins/cheese/stargazers" data-count-api="/repos/evitolins/cheese#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star evitolins/cheese on GitHub">Star</a></h1>
+  
   <h2>example: Simple mouse event routing.</p>
   <canvas id='viewport' width=400 height=300></canvas>
   <br>
-  <input id='button1' type='button' value='draw'/>
-  <input id='button2' type='button' value='erase'/>
-  <input id='button3' type='button' value='eyedropper'/>
-  <input id='button4' type='button' value='clear'/>
-  <div id='colorSampled'></div>
+  <div class="buttonContainer">
+    <input id='button1' type='button' class='exampleBtn' value='draw'/>
+    <input id='button2' type='button' class='exampleBtn' value='erase'/>
+    <input id='button3' type='button' class='exampleBtn' value='eyedropper'/>
+    <input id='button4' type='button' class='exampleBtn' value='clear'/>
+    <div class='colorPickedContainer'><div class='colorPicked'></div></div>
+  </div>
   <h2>code: route assignment example</h2>
   <pre>
     <code>

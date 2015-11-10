@@ -1,9 +1,25 @@
-(function (Cheese, window, document) {
+(function (Cheese, document) {
     'use strict';
     var elem = document.getElementById('viewport'),
         cheese = new Cheese(elem),
 
-        // Example Methods for routes
+        // Elements for example UI
+        btn1 = document.getElementById('button1'),
+        btn2 = document.getElementById('button2'),
+        btn3 = document.getElementById('button3'),
+        btn4 = document.getElementById('button4'),
+        colorSampled = document.getElementsByClassName('colorPicked')[0],
+
+        // Example methods for routes
+        setButtonState = function (currentRoute) {
+            btn1.classList.remove('current');
+            btn2.classList.remove('current');
+            btn3.classList.remove('current');
+            if (currentRoute === 'draw') btn1.classList.add('current');
+            if (currentRoute === 'erase') btn2.classList.add('current');
+            if (currentRoute === 'eyedropper') btn3.classList.add('current');
+        },
+
         relCoords = function (e, elem) {
             var rect = elem.getBoundingClientRect(),
                 offset = {
@@ -27,31 +43,19 @@
             ctx.fillStyle = fillStyle;
             ctx.fillRect(x - size / 2, y - size / 2, size, size);
         },
-        
+
         erase = function (canvas, x, y, size) {
             var ctx = canvas.getContext('2d');
             size = size || 1;
             ctx.clearRect(x - size / 2, y - size / 2, size, size);
         },
-        
+
         colorSample = function (canvas, x, y) {
             var ctx = canvas.getContext('2d'),
                 s = ctx.getImageData(x, y, 1, 1);
             return [ s.data[0], s.data[1], s.data[2], s.data[3] ];
         },
         isDragging = false;
-
-
-    // Add UI to set routes
-    var btn1 = document.getElementById('button1'),
-        btn2 = document.getElementById('button2'),
-        btn3 = document.getElementById('button3'),
-        btn4 = document.getElementById('button4'),
-        colorSampled = document.getElementById('colorSampled');
-    btn1.addEventListener('click', function () { cheese.setRoute('draw'); });
-    btn2.addEventListener('click', function () { cheese.setRoute('erase'); });
-    btn3.addEventListener('click', function () { cheese.setRoute('eyedropper'); });
-    btn4.addEventListener('click', function () { clear(elem); });
 
 
     // Add Route Behaviors
@@ -84,8 +88,14 @@
         }
     });
 
-    cheese.setRoute('route1');
+    // Bind buttons to set routes
+    btn1.addEventListener('click', function () { cheese.setRoute('draw'); setButtonState('draw');});
+    btn2.addEventListener('click', function () { cheese.setRoute('erase'); setButtonState('erase');});
+    btn3.addEventListener('click', function () { cheese.setRoute('eyedropper'); setButtonState('eyedropper');});
+    btn4.addEventListener('click', function () { clear(elem); });
 
-    window.cheese = cheese;
+    // Set Default Route
+    cheese.setRoute('draw');
+    setButtonState('draw');
 
-}(Cheese, window, document));
+}(Cheese, document));
