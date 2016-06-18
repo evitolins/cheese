@@ -1,0 +1,79 @@
+body {
+  background: #F2EFAF;
+  font-family: Helvetica Neue, Helvetica, sans-serif;
+  color: #CC841D;
+  padding: 10px 40px;
+}
+
+h1{
+  font-weight: 100;
+  font-size: 3em;
+}
+
+h2{
+  font-weight: 100;
+  font-size: 1.4em;
+}
+
+pre {
+  min-width: 400px;
+  max-width: 800px;
+  background: #E7E4A7;
+  color: #86856C;
+  overflow: auto;
+  border-radius: 6px;
+  border: 1px #CC841D solid;
+}
+
+canvas {
+  background: white;
+  width: 400px;
+  height: 300px;
+  outline: 4px #aaa solid;
+  cursor: crosshair;
+}
+
+input[type="button"] {
+    outline: none;
+}
+
+.buttonContainer {
+  position: relative;
+  width: 400px;
+}
+
+.colorPickedContainer {
+  position: absolute;
+  right: 0;
+  top: 8px;
+}
+
+.colorPicked {
+  width: 20px;
+  height: 20px;
+  outline: 1px #aaa solid;
+}
+
+.github-button {
+  display: none;
+}
+
+.exampleBtn {
+    background: #fff;
+    border: 1px outset #fff;
+    border-radius: 6px;
+    font-size: 0.6em;
+    padding: 0 0.9em;
+    line-height: 1em;
+    height: 2em;
+    font-weight: 200;
+    font-family: helvetica neue, helvetica, sans-serif;
+    color: #777;
+    transition: .1s;
+    cursor: pointer;
+}
+
+.exampleBtn.current {
+    background: #CC841D;
+    color: #fff;
+}
