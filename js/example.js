@@ -62,8 +62,8 @@
     cheese.addRoute('draw', {
         'mouseover' : function (e) { this.style.outlineColor = "#CC841D"; },
         'mouseout'  : function (e) { this.style.outlineColor = ""; },
-        'mousedown' : function (e) { isDragging = true; draw(this, e.relX, e.relY, "#CC841D", 10); },
-        'mousemove' : function (e) { if (isDragging) { draw(this, e.relX, e.relY, "#CC841D", 10); } },
+        'mousedown' : function (e) { isDragging = true; draw(this, relCoords(e, this).x, relCoords(e, this).y, "#CC841D", 10); },
+        'mousemove' : function (e) { if (isDragging) { draw(this, relCoords(e, this).x, relCoords(e, this).y, "#CC841D", 10); } },
         'mouseup'   : function (e) { isDragging = false; }
     });
     cheese.addRoute('erase', {
